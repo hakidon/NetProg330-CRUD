@@ -1,5 +1,5 @@
 import sqlite3
-
+import json 
 from flask import Flask, jsonify
 app = Flask(__name__) #creating the Flask class object   
 
@@ -19,39 +19,17 @@ def test_con():
 
 @app.route('/view') 
 def get_employee():
-    employees = []
+    employee_list = []
     try:
         conn = connect_to_db()
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
         cur.execute("SELECT * FROM employee_info")
         rows = cur.fetchall()
-        return jsonify([dict(row) for row in rows])
+        employees = [dict(row) for row in rows]
+        return json.dumps(employees)
     except Exception as e:
         return jsonify({'error': str(e)})
-
-
-# def get_user_by_id(user_id):
-#     user = {}
-#     try:
-#         conn = connect_to_db()
-#         conn.row_factory = sqlite3.Row
-#         cur = conn.cursor()
-#         cur.execute("SELECT * FROM users WHERE user_id = ?", 
-#                        (user_id,))
-#         row = cur.fetchone()
-
-#         # convert row object to dictionary
-#         user["user_id"] = row["user_id"]
-#         user["name"] = row["name"]
-#         user["email"] = row["email"]
-#         user["phone"] = row["phone"]
-#         user["address"] = row["address"]
-#         user["country"] = row["country"]
-#     except:
-#         user = {}
-
-#     return user
 
 if __name__ =='__main__':  
     app.run(debug = True)  
