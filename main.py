@@ -1,6 +1,6 @@
 import sqlite3
 
-from flask import Flask
+from flask import Flask, jsonify
 app = Flask(__name__) #creating the Flask class object   
 
 def connect_to_db():
@@ -26,25 +26,9 @@ def get_employee():
         cur = conn.cursor()
         cur.execute("SELECT * FROM employee_info")
         rows = cur.fetchall()
-        return rows
-        # # convert row objects to dictionary
-        # for i in rows:
-        #     employee = {}
-        #     employee["employee name"] = i["employee name"]
-        #     employee["gender"] = i["gender"]
-        #     employee["email"] = i["email"]
-        #     employee["address"] = i["address"]
-        #     employee["Academic qualification"] = i["Academic qualification"]
-        #     employee["Username"] = i["Username"]
-        #     employee["Password"] = i["Password"]
-
-        #     employees.append(employee)
-
-    except:
-        employees = []
-        return 'asdas'
-
-    # return employees
+        return jsonify([dict(row) for row in rows])
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 
 # def get_user_by_id(user_id):
