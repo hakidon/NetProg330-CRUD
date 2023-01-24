@@ -292,6 +292,17 @@ color: white;
 }
 </style>
 <script>
+	if ("{{ success_insert }}") {
+		alert(("Insert successful!"));
+	}
+
+	if ("{{ success_edit }}") {
+		alert(("Edit successful!"));
+	}
+
+	if ("{{ success_delete }}") {
+		alert(("Delete successful!"));
+	}
 function filter(table,text) {
 var searchValue = text;
 		var rows = table.querySelectorAll("tr");
@@ -395,6 +406,10 @@ function onEditClick(id) {
 	// document.getElementById("male").checked = true;
 }
 
+function onDeleteClick(id) {
+	document.getElementById("delete_employee_id").value = id;
+}
+
 $(document).ready(function(){
 	var table = document.getElementById("table-employee");
 
@@ -434,13 +449,7 @@ $(document).ready(function(){
 		}
 	});
 
-	if ("{{ success_insert }}") {
-		alert(("Insert successful!"));
-	}
-
-	if ("{{ success_edit }}") {
-		alert(("Edit successful!"));
-	}
+	
 });
 </script>
 </head>
@@ -503,7 +512,7 @@ $(document).ready(function(){
 						<td>{{ employee['address'] }}</td>
 							<td>
 								<a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="onEditClick('{{ employee['employee id'] }}')"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick="onDeleteClick('{{ employee['employee id'] }}')"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 							</td>
 						</tr>
 					{% endfor %}
@@ -639,7 +648,7 @@ $(document).ready(function(){
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form action="/admin/view" method="POST">
 				<div class="modal-header">						
 					<h4 class="modal-title">Delete Employee</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -647,6 +656,12 @@ $(document).ready(function(){
 				<div class="modal-body del-text">					
 					<p>Are you sure you want to delete these records?</p>
 					<p class="text-warning"><small>This action cannot be undone.</small></p>
+					<div>
+						<input type="text" name="submit_type" value="delete">
+					</div>	
+					<div>
+						<input type="text" name="employee_id" id="delete_employee_id">
+					</div>	
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-info" data-dismiss="modal" value="Cancel">

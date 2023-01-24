@@ -108,7 +108,10 @@ def admin_view():
                 session['edit_admin'] = True
                 return redirect('/admin/view')
             elif submit_type == 'delete':
-                pass
+                cur.execute('DELETE FROM employee_info WHERE "employee id"=?', ( data['employee_id'],))
+                conn.commit()
+                session['delete_admin'] = True
+                return redirect('/admin/view')
         elif request.method == 'GET':
             temp_success_insert = session.get('insert_admin', '')
             if temp_success_insert:
@@ -118,7 +121,11 @@ def admin_view():
             if temp_success_edit:
                 session.pop('edit_admin', '')
 
-            return render_template('employee_table.html', employee_data=response.json(), success_insert=temp_success_insert, success_edit=temp_success_edit)
+            temp_success_delete = session.get('delete_admin', '')
+            if temp_success_delete:
+                session.pop('delete_admin', '')
+
+            return render_template('employee_table.html', employee_data=response.json(), success_insert=temp_success_insert, success_edit=temp_success_edit, success_delete=temp_success_delete)
     else:
         session.clear()
         return redirect('/')
