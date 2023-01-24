@@ -54,7 +54,6 @@ def main():
     elif request.method == 'POST':
         name = request.form['username']
         passw = request.form['password']
-        # sads
 
         # get username and password admin from admin table 
         # auth 
