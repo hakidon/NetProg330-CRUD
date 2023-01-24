@@ -61,7 +61,11 @@ def logout():
 def main():
     session.clear()
     if request.method == 'GET':
-        return render_template('login.html')
+        temp_success_insert = session.get('insert_employee', '')
+        if temp_success_insert:
+            session.pop('insert_employee', '')
+            
+        return render_template('login.html', success_signup=1)
     elif request.method == 'POST':
         name = request.form['username']
         passw = request.form['password']
@@ -82,7 +86,7 @@ def main():
             # return render_template('employee_table.html')
             # return render_template('employee_table.html', login_type=session['login_type'])
         else:
-            return render_template('login.html', fail_sigin=1)
+            return render_template('login.html', fail_signin=1)
 
 @app.route('/employee/signup', methods=['POST']) 
 def signup():
