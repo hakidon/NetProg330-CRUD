@@ -84,13 +84,14 @@ def main():
         else:
             return render_template('login.html', fail_sigin=1)
 
+@app.route('/employee/signup', methods=['POST']) 
+
 @app.route('/admin/view',  methods=['GET', 'POST']) 
 def admin_view():
     check_session('admin')
     username = session.get('session_id')
     if check_admin(username):
         response = requests.get(prepare_api('/api/employee'))
-
         if request.method == 'POST':
             conn = connect_to_db()
             conn.row_factory = sqlite3.Row
