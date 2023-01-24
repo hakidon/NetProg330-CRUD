@@ -51,10 +51,10 @@ def check_admin(username):
 def main():
     if request.method == 'GET':
         return render_template('login.html')
-        # return render_template('404.html')
     elif request.method == 'POST':
         name = request.form['username']
         passw = request.form['password']
+        # sads
 
         # get username and password admin from admin table 
         # auth 
