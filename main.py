@@ -18,6 +18,11 @@ app.secret_key = 'yoursecretkey'
 def page_not_found(e):
     return render_template('404.html'), 404
 
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
+
 def connect_to_db():
     conn = sqlite3.connect('330_project.db')
     return conn
