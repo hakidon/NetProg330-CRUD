@@ -362,7 +362,11 @@ function createPagination(table, entriesPerPage) {
         pagination.appendChild(li);
     }
 }
-	
+
+function onEditClick() {
+alert('adsad');
+}
+
 $(document).ready(function(){
 	var table = document.getElementById("table-employee");
 
@@ -462,7 +466,7 @@ $(document).ready(function(){
 						<td>{{ employee['email'] }}</td>
 						<td>{{ employee['address'] }}</td>
 							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="onEditClick()"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 							</td>
 						</tr>
@@ -478,7 +482,7 @@ $(document).ready(function(){
 		</div>
 	</div>        
 </div>
-<!-- Edit Modal HTML -->
+<!-- Add Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
