@@ -163,14 +163,16 @@ margin-top: -3px;
   padding-right: 30px;
   position: absolute;
 }
-
-
-
+/* 
+.edit-btn:not(.saved):focus {
+  outline:0;
+} */
+/* 
 .edit-btn.saved {
     background-color: #0BDA51;
   border: 2px solid black;
    border-radius: 5px;
-}
+} */
 
 .edit-btn:hover {
   background-color: #e2e8f0;
@@ -225,17 +227,18 @@ color: white;
   $(document).ready(function() {
 
      $('.edit-btn').click(function() {
-    if ($(this).hasClass("saved")) {
-      $(this).removeClass("saved").html('<i class="fas fa-pencil-alt"></i>');
-	  var $text = $(this).closest('.row').find('.text-secondary');
-        $text.attr('contentEditable', false);
-    } else {
-      $(this).addClass("saved").html('<i class="fas fa-check"></i>');
+    // if ($(this).hasClass("saved")) {
+    //   $(this).removeClass("saved").html('<i class="fas fa-pencil-alt"></i>');
+	  // var $text = $(this).closest('.row').find('.text-secondary');
+    //     $text.attr('contentEditable', false);
+    // } else {
+    //   $(this).addClass("saved").html('<i class="fas fa-check"></i>');
 	  
-	  var $text = $(this).closest('.row').find('.text-secondary');
-        $text.attr('contentEditable', true);
-        $text.focus();
-    }
+	  // var $text = $(this).closest('.row').find('.text-secondary');
+    //     $text.attr('contentEditable', true);
+    //     $text.focus();
+    // }
+    alert('sadsa')
   });
     });
 
