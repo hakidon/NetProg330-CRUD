@@ -74,11 +74,16 @@ def main():
         cur = conn.cursor()
         cur.execute('SELECT * FROM admin_auth where Username = ? and Password = ?',(name, passw))
         admin = cur.fetchone()
-
-        if admin:
+        cur.execute('SELECT * FROM employee_info where Username = ? and Password = ?',(name, passw))
+        employee = cur.fetchone()
+        if admin or employee:
             # Admin is authenticated
             session['session_id'] = name
-            session['login_type'] = 'admin'
+            if admin:
+                session['login_type'] = 'admin'
+            else:
+                session['login_type'] = 'admin'
+
             return redirect('/admin/view') 
             # return render_template('employee_table.html')
             # return render_template('employee_table.html', login_type=session['login_type'])
