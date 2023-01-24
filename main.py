@@ -59,11 +59,9 @@ def logout():
 
 @app.route('/', methods=['GET', 'POST']) 
 def main():
-    session.clear()
     if request.method == 'GET':
         temp_success_insert = session.get('insert_employee', '')
-        if temp_success_insert:
-            session.pop('insert_employee', '')
+        session.clear()
         return render_template('login.html', success_signup=temp_success_insert)
     elif request.method == 'POST':
         name = request.form['username']
