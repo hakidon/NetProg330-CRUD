@@ -81,12 +81,10 @@ def main():
             session['session_id'] = name
             if admin:
                 session['login_type'] = 'admin'
+                return redirect('/admin/view') 
             else:
-                session['login_type'] = 'admin'
-
-            return redirect('/admin/view') 
-            # return render_template('employee_table.html')
-            # return render_template('employee_table.html', login_type=session['login_type'])
+                session['login_type'] = 'employee'
+                return redirect('/employee/view') 
         else:
             return render_template('login.html', fail_signin=1)
 
