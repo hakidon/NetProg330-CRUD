@@ -54,6 +54,7 @@ def logout():
 
 @app.route('/', methods=['GET', 'POST']) 
 def main():
+    session.clear()
     if request.method == 'GET':
         return render_template('login.html')
     elif request.method == 'POST':
