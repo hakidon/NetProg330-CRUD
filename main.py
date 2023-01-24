@@ -64,8 +64,7 @@ def main():
         temp_success_insert = session.get('insert_employee', '')
         if temp_success_insert:
             session.pop('insert_employee', '')
-            return render_template('login.html', success_signup=1)
-        return render_template('login.html')
+        return render_template('login.html', success_signup=temp_success_insert)
     elif request.method == 'POST':
         name = request.form['username']
         passw = request.form['password']
