@@ -287,9 +287,12 @@ right: 0;
 background-color: #ff0f0f;
 color: white;
    font-size: 15px;
-
-
 }
+
+.button-log:hover {
+	background-color: #FA8072;
+}
+
 </style>
 <script>
 	if ("{{ success_insert }}") {
@@ -656,10 +659,10 @@ $(document).ready(function(){
 				<div class="modal-body del-text">					
 					<p>Are you sure you want to delete these records?</p>
 					<p class="text-warning"><small>This action cannot be undone.</small></p>
-					<div>
+					<div hidden>
 						<input type="text" name="submit_type" value="delete">
 					</div>	
-					<div>
+					<div hidden>
 						<input type="text" name="employee_id" id="delete_employee_id">
 					</div>	
 				</div>

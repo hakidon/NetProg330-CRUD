@@ -13,35 +13,39 @@
 
 <body>
     <div class="container" id="container">
-
+        
         <div class="form-container  sign-up-container">
-            <form action="#">
-                <div class="header">Sign Up</div>
-                <div class="social__media__container">
-                    <a href="#" target="_blank" class="social codepen">
-                        <i class="fa fa-github" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="social google">
-                        <i class="fa fa-google-plus-official" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" target="_blank" class="social instagram">
+           
+            <form action="#" class="form-sign-up">
 
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                    </a>
-                </div>
-
+                <div class="header header-signup">Sign Up</div>
+         
                 <div class="button-input-group">
+                    <div class="form-sign-up group input-group">
+                        <input class="left" type="text" placeholder="Username" required>
+                        <input class="right" type="password" placeholder="Password" required>
+                    </div>
                     <div class="group input-group">
-                        <input type="text" placeholder="Name" required>
+                        <input type="text" placeholder="Employee Name" required>
                     </div>
                     <div class="group input-group">
                         <input type="email" placeholder="Email" required>
                     </div>
                     <div class="group input-group">
-                        <input type="password" placeholder="Password" required >
+                        <input type="text" placeholder="Address" required>
                     </div>
-                    <div class="alert-text signup__alert">
-                        <span class="help__text">Please input correct password</span>
+                    <div class="group input-group">
+                        <!-- <input type="text" placeholder="Academic qualification" required> -->
+                        <select id="input-select" class="input-select" name="academic_qualification" required>
+							<option value="Bachelor degree">Bachelor degree</option>
+							<option value="Master">Master</option>
+							<option value="PHD">PhD</option>
+						</select>
+                    </div>
+                    <div class="group input-group">
+                        <!-- <input type="text" placeholder="Gender" required> -->
+                        <input type="radio" name="gender" value="male" required style="width:18px; height:18px; margin-right: 10px;"> Male
+                              <input type="radio" name="gender" value="female" required style="width:18px; height:18px; margin-right: 10px; margin-left: 60px;"> Female<br>
                     </div>
                     <div class="group button-group">
                         <button class="signup-btn" onclick="return false;">Sign Up</button>
@@ -366,12 +370,28 @@ form {
     text-align: center;
 }
 
+.form-sign-up {
+    display: flex;
+}
+
+.form-sign-up .left {
+    margin-right: 5px;
+}
+
+.form-sign-up .right {
+    margin-left: 5px;
+}
+
 .header {
     color: var(--color-primary-dark);
     font-size: var(--step-1);
     font-weight: 500;
     text-align: center;
     letter-spacing: 1px;
+}
+
+.header-signup {
+margin-bottom: 8px;
 }
 
 /* ----------------- The start of SideShift Design ----------------- */
@@ -658,6 +678,17 @@ a.login-link:hover {
     transition: all 0.4s ease;
 }
 
+.input-select {
+    width: 100%;
+    height: 47px;
+    border-radius: 8px;
+    border: none;
+    /* border-color: #6dd5ed;
+    border-width: 3px; */
+    box-shadow: 0 0 0 2px var(--color-border-focus);
+}
+
+
 .button-input-group {
     width: 100%;
     display: grid;
@@ -712,6 +743,7 @@ input:not(:placeholder-shown) {
     background-color: var(--color-background);
     border-color: var(--color-border-focus);
 }
+
 
 input:focus,
 input:placeholder-shown {
@@ -854,6 +886,24 @@ button {
   const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
+const inputSelect = document.getElementById("input-select");
+
+inputSelect.addEventListener("focus", () => {
+    inputSelect.style.cssText = "box-shadow: ''; background-color: ''";
+    inputSelect.style.cssText = "box-shadow: 0 0 0 4px var(--color-success);";
+});
+inputSelect.addEventListener("blur", () => {
+    inputSelect.style.cssText = "box-shadow: '';";
+    inputSelect.style.cssText = "box-shadow: 0 0 0 2px var(--color-success); background-color: var(--color-background)";
+
+});
+// inputSelect.addEventListener("change", () => {
+//     inputSelect.style.cssText = "box-shadow: 0 0 0 2px var(--color-success); background-color: var(--color-background)";
+//     });
+
+signUpButton.addEventListener("click", () => {
+    container.classList.add("right-panel-active");
+});
 
 signUpButton.addEventListener("click", () => {
     container.classList.add("right-panel-active");
