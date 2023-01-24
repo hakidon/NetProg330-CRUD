@@ -105,18 +105,19 @@ def signup():
 
 @app.route('/employee/view', methods=['GET', 'POST']) 
 def employee_view():
-    data = request.form
-    if not data:
-        return redirect('/') 
+    return render_template('view.html')
+    # data = request.form
+    # if not data:
+    #     return redirect('/') 
     
-    conn = connect_to_db()
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
+    # conn = connect_to_db()
+    # conn.row_factory = sqlite3.Row
+    # cur = conn.cursor()
     
-    cur.execute('INSERT INTO employee_info ("employee name", "Academic qualification", gender, email, address, Username, Password) VALUES (?,?,?,?,?,?,?)', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password']))
-    conn.commit()
-    session['insert_employee'] = True
-    return redirect('/')
+    # cur.execute('INSERT INTO employee_info ("employee name", "Academic qualification", gender, email, address, Username, Password) VALUES (?,?,?,?,?,?,?)', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password']))
+    # conn.commit()
+    # session['insert_employee'] = True
+    # return redirect('/')
 
 @app.route('/admin/view',  methods=['GET', 'POST']) 
 def admin_view():
