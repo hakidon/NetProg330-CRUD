@@ -363,7 +363,7 @@ function createPagination(table, entriesPerPage) {
     }
 }
 
-function onEditClick() {
+function onEditClick(employee_id) {
 alert('adsad');
 }
 
@@ -466,7 +466,7 @@ $(document).ready(function(){
 						<td>{{ employee['email'] }}</td>
 						<td>{{ employee['address'] }}</td>
 							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="onEditClick()"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="onEditClick('{{ employee['employee id'] }}")'><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 							</td>
 						</tr>
