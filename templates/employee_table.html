@@ -364,17 +364,7 @@ function createPagination(table, entriesPerPage) {
 }
 
 function onEditClick(id) {
-	let table = document.getElementById('myTable');
-
-	// Get all the columns
-	let columns = table.getElementsByTagName('td');
-
-	// Iterate through columns and get the value of each one
-	let columnValues = [];
-	for (let i = 0; i < columns.length; i++) {
-	columnValues.push(columns[i].innerText);
-	}
-
+	console.log(this.value)
 }
 
 $(document).ready(function(){
