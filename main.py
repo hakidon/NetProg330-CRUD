@@ -32,8 +32,7 @@ def check_session(type):
     if not username or login_type != type:
         session.clear()
         return redirect('/') 
-    else: 
-        return username
+
     
 def check_admin(username):
     conn = connect_to_db()
@@ -46,7 +45,13 @@ def check_admin(username):
         return True
     else:
         return False
-    
+
+@app.route('/logout') 
+def logout():
+    session.clear()
+    return redirect('/')
+
+
 @app.route('/', methods=['GET', 'POST']) 
 def main():
     if request.method == 'GET':
@@ -75,7 +80,8 @@ def main():
 
 @app.route('/admin/view',  methods=['GET', 'POST']) 
 def admin_view():
-    username = check_session('admin')
+    check_session('admin')
+    username = session.get('session_id')
     if check_admin(username):
         response = requests.get(prepare_api('/api/employee'))
 
@@ -90,15 +96,23 @@ def admin_view():
                 conn.commit()
                 session['insert_admin'] = True
                 return redirect('/admin/view')
-            elif submit_type == 'update':
-                pass
+            elif submit_type == 'edit':
+                cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
+                conn.commit()
+                session['edit_admin'] = True
+                return redirect('/admin/view')
             elif submit_type == 'delete':
                 pass
         elif request.method == 'GET':
             temp_success_insert = session.get('insert_admin', '')
             if temp_success_insert:
                 session.pop('insert_admin', '')
-            return render_template('employee_table.html', employee_data=response.json(), success_insert=temp_success_insert)
+
+            temp_success_edit = session.get('edit_admin', '')
+            if temp_success_edit:
+                session.pop('edit_admin', '')
+
+            return render_template('employee_table.html', employee_data=response.json(), success_insert=temp_success_insert, success_edit=temp_success_edit)
     else:
         session.clear()
         return redirect('/')
@@ -123,7 +137,7 @@ def get_employee_all():
         conn = connect_to_db()
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
-        cur.execute('SELECT "employee id", "employee name", "gender", "email", "address", "Academic qualification" FROM employee_info')
+        cur.execute('SELECT * FROM employee_info')
         rows = cur.fetchall()
         employees = [dict(row) for row in rows]
         return json.dumps(employees)
@@ -143,8 +157,10 @@ def func_employee(employee_id=None):
     if request.method == 'GET':
         # View Employee
         try:
-            cur.execute('SELECT "employee id", "employee name", "gender", "email", "address", "Academic qualification" FROM employee_info  WHERE "employee id"=?', (employee_id,))
+            # cur.execute('SELECT "employee id", "employee name", "gender", "email", "address", "Academic qualification" FROM employee_info  WHERE "employee id"=?', (employee_id,))
+            cur.execute('SELECT * FROM employee_info  WHERE "employee id"=?', (employee_id,))
             rows = cur.fetchone()
+
             if rows:
                 return jsonify(dict(rows))
             else:

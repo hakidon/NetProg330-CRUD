@@ -1,1 +1,1 @@
-success_insert
+            return redirect('/admin/view') 
