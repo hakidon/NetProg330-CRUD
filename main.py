@@ -149,7 +149,7 @@ def employee_view():
                 # cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
                 # conn.commit()
     else:
-        return userid
+        return username
         # session.clear()
         # return redirect('/')
     # data = request.form
