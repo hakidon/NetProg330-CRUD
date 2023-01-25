@@ -116,7 +116,11 @@ def signup():
     except sqlite3.IntegrityError as e:
         session['insert_employee'] = 2
     finally:
-        return redirect('/')
+        login_type = session.get('login_type')
+        if login_type == 'admin':
+            return redirect('/admin/view')
+        else:
+            return redirect('/')
 
     
 
