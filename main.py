@@ -47,7 +47,7 @@ def check_employee(username):
     conn = connect_to_db()
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    cur.execute('SELECT * FROM imployee_info WHERE Username = ?', (username,))
+    cur.execute('SELECT * FROM employee_info WHERE Username = ?', (username,))
     employee = cur.fetchone()
 
     if employee:
@@ -126,12 +126,11 @@ def employee_view():
     username = session.get('session_id')
     userid = check_employee(username)
     if userid:
-        response = requests.get(prepare_api('/api/employee/'+userid))
-        return response
+        response = requests.get(prepare_api('/api/employee/'+str(userid)))
+        return render_template('view.html', employee_data=response.json())
     else:
         session.clear()
         return redirect('/')
-    # return render_template('view.html')
     # data = request.form
     # if not data:
     #     return redirect('/') 
