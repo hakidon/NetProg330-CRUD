@@ -355,20 +355,21 @@ color: white;
 <script>
 
   $(document).ready(function() {
-
+    
      $('.edit-btn').click(function() {
-    // if ($(this).hasClass("saved")) {
-    //   $(this).removeClass("saved").html('<i class="fas fa-pencil-alt"></i>');
-	  // var $text = $(this).closest('.row').find('.text-secondary');
-    //     $text.attr('contentEditable', false);
-    // } else {
-    //   $(this).addClass("saved").html('<i class="fas fa-check"></i>');
-	  
-	  // var $text = $(this).closest('.row').find('.text-secondary');
-    //     $text.attr('contentEditable', true);
-    //     $text.focus();
-    // }
-    alert('sadsa')
+
+	document.getElementById("edit_name").value = "{{ employee_data['employee name'] }}";
+	// document.getElementById("edit_username").value = username;
+	// document.getElementById("edit_password").value = password;
+	// document.getElementById("edit_academic_qualification").value = academic_qualification;
+	// // document.getElementById("edit_academic_qualification").value = name;
+	// document.getElementById("edit_email").value = email;
+	// document.getElementById("edit_address").value = address;
+	// if (gender == 'Male')
+	// 	document.getElementById("edit_male_radio").checked = true;
+	// else
+	// 	document.getElementById("edit_female_radio").checked = true;
+	// document.getElementById("edit_employee_id").value = id;
   });
     });
 
