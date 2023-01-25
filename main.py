@@ -34,9 +34,14 @@ def check_session(type):
     username = session.get('session_id')
     login_type = session.get('login_type')
 
+    # if not username or login_type != type:
+    #     session.clear()
+    #     return redirect('/') 
+
     if not username or login_type != type:
-        session.clear()
-        return redirect('/') 
+        return 'tre'
+    else:
+        return 'fal'
 
     
 def check_admin(username):
@@ -105,8 +110,7 @@ def signup():
 
 @app.route('/employee/view', methods=['GET', 'POST']) 
 def employee_view():
-    check_session('employee')
-    return 'asd'
+    return check_session('employee')
     # return render_template('view.html')
     # data = request.form
     # if not data:
