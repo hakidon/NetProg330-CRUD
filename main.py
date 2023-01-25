@@ -51,9 +51,9 @@ def check_employee(username):
     employee = cur.fetchone()
 
     if employee:
-        return True
+        return employee['employee id']
     else:
-        return False
+        return ''
     
 def check_admin(username):
     conn = connect_to_db()
@@ -124,8 +124,10 @@ def employee_view():
     if not check_session('employee'):
         return redirect('/')
     username = session.get('session_id')
-    if check_employee(username):
-        return 'yess'
+    userid = check_employee(username)
+    if userid:
+        response = requests.get(prepare_api('/api/employee/'+userid))
+        return response
     else:
         session.clear()
         return redirect('/')
