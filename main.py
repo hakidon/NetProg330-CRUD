@@ -249,66 +249,28 @@ def get_employee_all():
 def redirect_to_all():
     return redirect('/api/employee')
 
-@app.route('/api/employee/<employee_id>', methods=['GET'])
+@app.route('/api/employee/<employee_id>')
 def func_employee(employee_id=None):
     conn = connect_to_db()
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     
-    if request.method == 'GET':
-        # View Employee
-        try:
-            # cur.execute('SELECT "employee id", "employee name", "gender", "email", "address", "Academic qualification" FROM employee_info  WHERE "employee id"=?', (employee_id,))
-            cur.execute('SELECT * FROM employee_info  WHERE "employee id"=?', (employee_id,))
-            rows = cur.fetchone()
+    # View Employee
+    try:
+        # cur.execute('SELECT "employee id", "employee name", "gender", "email", "address", "Academic qualification" FROM employee_info  WHERE "employee id"=?', (employee_id,))
+        cur.execute('SELECT * FROM employee_info  WHERE "employee id"=?', (employee_id,))
+        rows = cur.fetchone()
 
-            if rows:
-                return jsonify(dict(rows))
-            else:
-                return render_template('404.html'), 404
-        except Exception as e:
-            return jsonify({'error': str(e)})
-    elif request.method == 'DELETE':
-        # Delete Employee
-        try:
-            cur.execute('DELETE FROM employee_info WHERE "employee id"=?', (employee_id,))
-            conn.commit()
-            return jsonify({'message': 'Employee Deleted Successfully'})
-        except Exception as e:
-            return jsonify({'error': str(e)})
-    elif request.method == 'POST':
-        try:
-            column_mapping = {
-                'employee_name': '"employee name"',
-                'employee_gender': 'gender',
-                'employee_email': 'email',
-                'employee_address': 'address',
-                'employee_academic_qualification': '"Academic qualification"',
-                'employee_username': 'Username',
-                'employee_password': 'Password'
-            }
-            data = request.get_json()
-            cur.execute('SELECT * FROM employee_info WHERE "employee id"=?', (employee_id,))
-            if cur.fetchone():
-                # Update Employee
-                update_query = 'UPDATE employee_info SET'
-                update_values = []
-                for key, value in data.items():
-                    if key in column_mapping:
-                        update_query += f' {column_mapping[key]}=?,'
-                        update_values.append(value)
-                update_query = update_query[:-1] + ' WHERE "employee id"=?'
-                update_values.append(employee_id)
-                cur.execute(update_query,update_values)
-                conn.commit()
-                return jsonify({'message': 'Employee Updated Successfully'})
-            else:
-                # Create Employee
-                cur.execute('INSERT INTO employee_info ("employee name", gender, email, address, "Academic qualification", Username, Password) VALUES (?,?,?,?,?,?,?)', (data['employee_name'], data['employee_gender'], data['employee_email'], data['employee_address'], data['employee_academic_qualification'], data['employee_username'], data['employee_password']))
-                conn.commit()
-                return jsonify({'message': 'Employee Created Successfully'})
-        except Exception as e:
-            return jsonify({'error': str(e)})
+        if rows:
+            return jsonify(dict(rows))
+        else:
+            return render_template('404.html'), 404
+    except Exception as e:
+        return jsonify({'error': str(e)})
+   
+
+
+        
 if __name__ =='__main__':  
     app.run(debug = True)  
 
