@@ -113,7 +113,7 @@ def signup():
 def employee_view():
     if not check_session('employee'):
         return redirect('/')
-    return 'adsad'
+
     # return render_template('view.html')
     # data = request.form
     # if not data:
@@ -130,7 +130,8 @@ def employee_view():
 
 @app.route('/admin/view',  methods=['GET', 'POST']) 
 def admin_view():
-    check_session('admin')
+    if not check_session('admin'):
+        return redirect('/')
     username = session.get('session_id')
     if check_admin(username):
         response = requests.get(prepare_api('/api/employee'))
