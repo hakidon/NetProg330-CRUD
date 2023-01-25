@@ -137,10 +137,18 @@ def employee_view():
                 conn.row_factory = sqlite3.Row
                 cur = conn.cursor()
                 data = request.form
-                cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
-                conn.commit()
-                session['edit_employee'] = True
-                return redirect('/employee/view')
+                try:
+                    cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))
+                    # conn.commit()
+                    return ("Data updated successfully")
+                except sqlite3.IntegrityError as e:
+                    return (e)
+
+                # cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
+                # conn.commit()
+
+                # session['edit_employee'] = True
+                # return redirect('/employee/view')
     else:
         session.clear()
         return redirect('/')
