@@ -186,10 +186,15 @@ def admin_view():
                 session['insert_admin'] = True
                 return redirect('/admin/view')
             elif submit_type == 'edit':
-                cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
-                conn.commit()
-                session['edit_admin'] = True
-                return redirect('/admin/view')
+                try:
+                    cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
+                    conn.commit()
+                    session['edit_admin'] = 1
+                except sqlite3.IntegrityError as e:
+                    session['edit_admin'] = 2
+                finally:
+                    return redirect('/admin/view')
+
             elif submit_type == 'delete':
                 cur.execute('DELETE FROM employee_info WHERE "employee id"=?', ( data['employee_id'],))
                 conn.commit()
