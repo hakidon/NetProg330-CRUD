@@ -106,7 +106,7 @@ def signup():
 @app.route('/employee/view', methods=['GET', 'POST']) 
 def employee_view():
     check_session('employee')
-    return session.get('session_id')
+    return 'asd'
     # return render_template('view.html')
     # data = request.form
     # if not data:
