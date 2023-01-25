@@ -130,7 +130,14 @@ def employee_view():
                 response = requests.get(prepare_api('/api/employee/'+str(userid)))
                 return render_template('view.html', employee_data=response.json())
             elif request.method == 'POST':
-                pass
+                conn = connect_to_db()
+                conn.row_factory = sqlite3.Row
+                cur = conn.cursor()
+                data = request.form
+                cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
+                conn.commit()
+                session['edit_employee'] = True
+                return redirect('/employee/view')
     else:
         session.clear()
         return redirect('/')
