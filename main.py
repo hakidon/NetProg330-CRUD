@@ -128,7 +128,10 @@ def employee_view():
     if userid:
             if request.method == 'GET':
                 response = requests.get(prepare_api('/api/employee/'+str(userid)))
-                return render_template('view.html', employee_data=response.json())
+                temp_success_edit = session.get('edit_employee', '')
+                if temp_success_edit:
+                    session.pop('edit_employee', '')
+                return render_template('view.html', employee_data=response.json(), success_edit=temp_success_edit)
             elif request.method == 'POST':
                 conn = connect_to_db()
                 conn.row_factory = sqlite3.Row
