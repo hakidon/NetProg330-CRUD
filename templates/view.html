@@ -301,7 +301,7 @@ margin-left: 35px;
 
 .button-log {
 border: none;
-margin-top: 14px;
+margin-top: 24px;
 margin-right: 40px;
 height: 40px;
 width: 150px;
@@ -311,6 +311,11 @@ float: right;
 right: 0;
 background-color: #ff0f0f;
 color: white;
+   font-size: 15px;
+}
+
+.button-log:hover {
+	background-color: #FA8072;
 }
 
 /* Modal styles */
@@ -381,7 +386,7 @@ color: white;
 <div>
 <img class="top-logo" src="{{ url_for('static', filename='img/logo.png') }}">
 
-<button class="button button-log">Logout <i class="fa fa-sign-out-alt" aria-hidden="true">  </i></button>
+<a href="{{ url_for('logout') }}"><button class="button button-log">Logout <i class="fa fa-sign-out-alt" aria-hidden="true">  </i></button></a>
 </div>
 
 </html>
