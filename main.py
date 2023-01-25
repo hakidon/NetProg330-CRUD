@@ -141,6 +141,7 @@ def employee_view():
                     cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))
                     conn.commit()
                     session['edit_employee'] = 1
+                    session['session_id'] = data['username']
                 except sqlite3.IntegrityError as e:
                     session['edit_employee'] = 2
                 finally:
