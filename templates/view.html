@@ -163,7 +163,7 @@ Employee Information And Details</h2>
 					<div hidden>
 						<input type="text" name="submit_type" value="edit">
 					</div>	
-					<div hidden>
+					<div >
 						<input type="text" name="employee_id" id="edit_employee_id">
 					</div>		
 				</div>
@@ -359,17 +359,17 @@ color: white;
      $('.edit-btn').click(function() {
 
 	document.getElementById("edit_name").value = "{{ employee_data['employee name'] }}";
-	// document.getElementById("edit_username").value = username;
-	// document.getElementById("edit_password").value = password;
-	// document.getElementById("edit_academic_qualification").value = academic_qualification;
-	// // document.getElementById("edit_academic_qualification").value = name;
-	// document.getElementById("edit_email").value = email;
-	// document.getElementById("edit_address").value = address;
-	// if (gender == 'Male')
-	// 	document.getElementById("edit_male_radio").checked = true;
-	// else
-	// 	document.getElementById("edit_female_radio").checked = true;
-	// document.getElementById("edit_employee_id").value = id;
+	document.getElementById("edit_username").value = "{{ employee_data['Username'] }}";
+	document.getElementById("edit_password").value = "{{ employee_data['Password'] }}";
+	document.getElementById("edit_academic_qualification").value = "{{ employee_data['Academic qualification'] }}";
+	// document.getElementById("edit_academic_qualification").value = name;
+	document.getElementById("edit_email").value = "{{ employee_data['email'] }}";
+	document.getElementById("edit_address").value = "{{ employee_data['address'] }}";
+	if ("{{ employee_data['gender'] }}" == 'Male')
+		document.getElementById("edit_male_radio").checked = true;
+	else
+		document.getElementById("edit_female_radio").checked = true;
+	document.getElementById("edit_employee_id").value = "{{ employee_data['employee id'] }}";
   });
     });
 
