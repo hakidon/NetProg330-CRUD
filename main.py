@@ -139,16 +139,17 @@ def employee_view():
                 data = request.form
                 try:
                     cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))
-                    # conn.commit()
-                    return ("Data updated successfully")
+                    conn.commit()
+                    session['edit_employee'] = True
                 except sqlite3.IntegrityError as e:
-                    return (str(e))
+                    session['edit_employee'] = False
+                
+                return redirect('/employee/view')
 
                 # cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
                 # conn.commit()
 
-                # session['edit_employee'] = True
-                # return redirect('/employee/view')
+                
     else:
         session.clear()
         return redirect('/')
