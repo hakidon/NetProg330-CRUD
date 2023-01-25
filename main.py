@@ -43,7 +43,17 @@ def check_session(type):
     #     return 'tre'
     # else:
     #     return 'fal'
+def check_employee(username):
+    conn = connect_to_db()
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM imployee_info WHERE Username = ?', (username,))
+    employee = cur.fetchone()
 
+    if employee:
+        return True
+    else:
+        return False
     
 def check_admin(username):
     conn = connect_to_db()
@@ -114,7 +124,11 @@ def employee_view():
     if not check_session('employee'):
         return redirect('/')
     username = session.get('session_id')
-
+    if check_employee(username):
+        return 'yess'
+    else:
+        session.clear()
+        return redirect('/')
     # return render_template('view.html')
     # data = request.form
     # if not data:
