@@ -126,8 +126,11 @@ def employee_view():
     username = session.get('session_id')
     userid = check_employee(username)
     if userid:
-        response = requests.get(prepare_api('/api/employee/'+str(userid)))
-        return render_template('view.html', employee_data=response.json())
+            if request.method == 'GET':
+                response = requests.get(prepare_api('/api/employee/'+str(userid)))
+                return render_template('view.html', employee_data=response.json())
+            elif request.method == 'POST':
+                pass
     else:
         session.clear()
         return redirect('/')
