@@ -113,6 +113,7 @@ def signup():
 def employee_view():
     if not check_session('employee'):
         return redirect('/')
+    username = session.get('session_id')
 
     # return render_template('view.html')
     # data = request.form
