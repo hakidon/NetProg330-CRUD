@@ -64,7 +64,11 @@
                     {% if fail_signin %}
                         <h5 class= "text-center info-text-danger" >Sign in unsuccessful. <br>Wrong username or password</h5>
                     {% elif success_signup %}
+                        {% if success_signup == 1 %}
                         <h5 class= "text-center info-text-success" >Sign up successful. <br>Please proceeed to sign in</h5>
+                        {% elif success_signup == 2 %}
+                        <h5 class= "text-center info-text-danger" >Sign up unsuccessful. <br>Username inserted currently exist</h5>
+                        {% endif %}
                     {% else %}
                         <a href="#" class="social codepen">
                             <i class="fa fa-github" aria-hidden="true"></i>
