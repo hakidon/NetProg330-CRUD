@@ -300,7 +300,12 @@ color: white;
 	}
 
 	if ("{{ success_edit }}") {
-		alert(("Edit successful!"));
+		if ("{{ success_edit }}" == 1) {
+			alert(("Edit successful!"));
+		}
+		else if ("{{ success_edit }}" == 2) {
+			alert(("Edit unsuccessful<br>Username is not unique"));
+		}
 	}
 
 	if ("{{ success_delete }}") {
