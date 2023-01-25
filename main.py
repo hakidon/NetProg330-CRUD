@@ -249,7 +249,7 @@ def get_employee_all():
 def redirect_to_all():
     return redirect('/api/employee')
 
-@app.route('/api/employee/<employee_id>', methods=['GET', 'DELETE', 'POST'])
+@app.route('/api/employee/<employee_id>', methods=['GET'])
 def func_employee(employee_id=None):
     conn = connect_to_db()
     conn.row_factory = sqlite3.Row
