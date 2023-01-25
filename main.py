@@ -36,7 +36,8 @@ def check_session(type):
 
     if not username or login_type != type:
         session.clear()
-        return redirect('/admin/view') 
+        return False
+    return True
 
     # if not username or login_type != type:
     #     return 'tre'
@@ -129,7 +130,6 @@ def employee_view():
 @app.route('/admin/view',  methods=['GET', 'POST']) 
 def admin_view():
     check_session('admin')
-    return 'adasd'
     username = session.get('session_id')
     if check_admin(username):
         response = requests.get(prepare_api('/api/employee'))
