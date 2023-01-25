@@ -20,7 +20,7 @@
   <h2 class="text-center font-weight-bold">
     <i class="fas fa-suitcase mr-2"></i>
 Employee Information And Details</h2>
-<h5 class= "text-center info-text" >Changes has been successfully updated.</h5>
+<h5 id="warning-text" class= "text-center info-text" >Changes has been successfully updated.</h5>
 <div class="card mb-3 ">
 <div class="card-body">
 <div class="row">
@@ -362,7 +362,7 @@ color: white;
   $(document).ready(function() {
     
      $('.edit-btn').click(function() {
-
+  document.getElementById("warning-text").hidden = true;
 	document.getElementById("edit_name").value = "{{ employee_data['employee name'] }}";
 	document.getElementById("edit_username").value = "{{ employee_data['Username'] }}";
 	document.getElementById("edit_password").value = "{{ employee_data['Password'] }}";
