@@ -28,7 +28,7 @@ Employee Information And Details</h2>
 <h6 class="mb-0">Employee ID</h6>
 </div>
 <div class="col-sm-5 text-secondary">
-{{ employee['employee id'] }}
+{{ employee_data['employee id'] }}
 </div>
 <a href="#editEmployeeModal" class="edit" data-toggle="modal">
   <button class="edit-btn">   
@@ -51,7 +51,7 @@ Employee Information And Details</h2>
     <h6 class="mb-0">Username</h6>
     </div>
     <div class="col-sm-5 text-secondary">
-    XXXX
+      {{ employee_data['Username'] }}
     </div>
     
     </div>
@@ -61,7 +61,7 @@ Employee Information And Details</h2>
       <h6 class="mb-0">Password</h6>
       </div>
       <div class="col-sm-5 text-secondary">
-      XXXX
+        {{ employee_data['Password'] }}
       </div>
       
       </div>
@@ -71,7 +71,8 @@ Employee Information And Details</h2>
         <h6 class="mb-0">Academic Qualification</h6>
         </div>
         <div class="col-sm-5 text-secondary">
-        XXX
+          {{ employee_data['Academic qualification'] }}
+
         </div>
         
         </div>
@@ -81,7 +82,8 @@ Employee Information And Details</h2>
           <h6 class="mb-0">Gender</h6>
           </div>
           <div class="col-sm-5 text-secondary">
-          XX
+            {{ employee_data['gender'] }}
+
           </div>
           
           </div>
@@ -91,7 +93,8 @@ Employee Information And Details</h2>
 <h6 class="mb-0">Email</h6>
 </div>
 <div class="col-sm-5 text-secondary">
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="84e2edf4c4eef1efe9f1ecaae5e8">[email&#160;protected]</a>
+<a href="#">        {{ employee_data['email'] }}
+</a>
 </div>
  
 </div>
@@ -101,7 +104,8 @@ Employee Information And Details</h2>
 <h6 class="mb-0">Address</h6>
 </div>
 <div class="col-sm-5 text-secondary">
-d
+  {{ employee_data['address'] }}
+
 </div>
 
 </div>
