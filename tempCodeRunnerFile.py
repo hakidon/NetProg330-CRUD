@@ -1,1 +1,1 @@
-            return redirect('/admin/view') 
+success_edit
