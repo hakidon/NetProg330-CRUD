@@ -39,10 +39,6 @@ def check_session(type):
         return False
     return True
 
-    # if not username or login_type != type:
-    #     return 'tre'
-    # else:
-    #     return 'fal'
 def check_employee(username):
     conn = connect_to_db()
     conn.row_factory = sqlite3.Row
