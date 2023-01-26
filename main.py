@@ -4,15 +4,8 @@ from flask import *
 from urllib.parse import urljoin
 import requests
 
-# progress
-# -Done display table using rest 
-
-# to do
-# - crud on admin
-
-
 app = Flask(__name__)
-app.secret_key = 'yoursecretkey'
+app.secret_key = '1234567890'
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -68,7 +61,6 @@ def logout():
     session.clear()
     return redirect('/')
 
-
 @app.route('/', methods=['GET', 'POST']) 
 def main():
     if request.method == 'GET':
@@ -118,8 +110,6 @@ def signup():
     finally:
         return redirect('/')
 
-    
-
 @app.route('/employee/view', methods=['GET', 'POST']) 
 def employee_view():
     if not check_session('employee'):
@@ -147,25 +137,8 @@ def employee_view():
                     session['edit_employee'] = 2
                 finally:
                     return redirect('/employee/view')
-
-                # cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                
-                # conn.commit()
     else:
-        return username
-        # session.clear()
-        # return redirect('/')
-    # data = request.form
-    # if not data:
-    #     return redirect('/') 
-    
-    # conn = connect_to_db()
-    # conn.row_factory = sqlite3.Row
-    # cur = conn.cursor()
-    
-    # cur.execute('INSERT INTO employee_info ("employee name", "Academic qualification", gender, email, address, Username, Password) VALUES (?,?,?,?,?,?,?)', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password']))
-    # conn.commit()
-    # session['insert_employee'] = True
-    # return redirect('/')
+        return redirect('/')
 
 @app.route('/admin/view',  methods=['GET', 'POST']) 
 def admin_view():
@@ -222,19 +195,6 @@ def admin_view():
         session.clear()
         return redirect('/')
 
-# @app.route("/success")
-# def success():
-#     return render_template('success.html')
-
-# @app.route('/test', methods=['POST']) 
-# def test():
-#     name = request.form['username']
-#     passw = request.form['password']
-#     # return 'name: {} - password:{}'.format(name, passw)
-#     response = requests.get(prepare_api('/api/employee/2'))
-#     return response.json()
-
-
 @app.route('/api/employee')
 def get_employee_all():
     employee_list = []
@@ -273,8 +233,6 @@ def func_employee(employee_id=None):
         return jsonify({'error': str(e)})
    
 
-
-        
 if __name__ =='__main__':  
     app.run(debug = True)  
 
