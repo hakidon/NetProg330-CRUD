@@ -116,11 +116,7 @@ def signup():
     except sqlite3.IntegrityError as e:
         session['insert_employee'] = 2
     finally:
-        login_type = session.get('login_type')
-        if login_type == 'admin':
-            return redirect('/admin/view')
-        else:
-            return redirect('/')
+        return redirect('/')
 
     
 
@@ -185,10 +181,14 @@ def admin_view():
             data = request.form
             submit_type = data['submit_type']
             if submit_type == 'add':
-                cur.execute('INSERT INTO employee_info ("employee name", "Academic qualification", gender, email, address, Username, Password) VALUES (?,?,?,?,?,?,?)', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password']))
-                conn.commit()
-                session['insert_admin'] = True
-                return redirect('/admin/view')
+                try:
+                    cur.execute('INSERT INTO employee_info ("employee name", "Academic qualification", gender, email, address, Username, Password) VALUES (?,?,?,?,?,?,?)', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password']))
+                    conn.commit()
+                    session['insert_admin'] = 1
+                except sqlite3.IntegrityError as e:
+                    session['insert_admin'] = 2
+                finally:
+                    return redirect('/admin/view')
             elif submit_type == 'edit':
                 try:
                     cur.execute('UPDATE employee_info SET "employee name" = ?, "Academic qualification" = ?, gender = ?, email = ?, address = ?, Username = ?, Password = ? WHERE "employee id" = ?', (data['name'], data['academic_qualification'], data['gender'], data['email'], data['address'], data['username'], data['password'], data['employee_id']))                

@@ -296,7 +296,12 @@ color: white;
 </style>
 <script>
 	if ("{{ success_insert }}") {
-		alert(("Insert successful!"));
+		if ("{{ success_insert }}" == 1) {
+			alert(("Insert successful!"));
+		}
+		else if ("{{ success_insert }}" == 2) {
+			alert(("Insert unsuccessful!\nUsername is not unique"));
+		}
 	}
 
 	if ("{{ success_edit }}") {
@@ -539,7 +544,7 @@ $(document).ready(function(){
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="/employee/signup" method="POST">
+			<form action="/admin/view" method="POST">
 				<div class="modal-header">						
 					<h4 class="modal-title">Add Employee</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
