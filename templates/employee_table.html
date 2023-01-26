@@ -410,13 +410,6 @@ function onEditClick(id) {
 	else
 		document.getElementById("edit_female_radio").checked = true;
 	document.getElementById("edit_employee_id").value = id;
-
-	// document.getElementById("edit_username").value = name;
-	// document.getElementById("edit_password").value = name;
-	// document.getElementById("male").checked = true;
-
-	// let name = currentRow.find("td:eq(1)").text(); // get current row 1st TD value
-	// document.getElementById("male").checked = true;
 }
 
 function onDeleteClick(id) {
@@ -573,8 +566,8 @@ $(document).ready(function(){
 
 					<label>Gender</label>
 					<div class="form-group" style="display: flex; align-items: center;">
-						<input type="radio" name="gender" value="male" required style="width:18px; height:18px; margin-right: 10px;"> Male
-  						<input type="radio" name="gender" value="female" required style="width:18px; height:18px; margin-right: 10px; margin-left: 60px;"> Female<br>
+						<input type="radio" name="gender" value="Male" required style="width:18px; height:18px; margin-right: 10px;"> Male
+  						<input type="radio" name="gender" value="Female" required style="width:18px; height:18px; margin-right: 10px; margin-left: 60px;"> Female<br>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
@@ -630,8 +623,8 @@ $(document).ready(function(){
 
 					<label>Gender</label>
 					<div class="form-group" style="display: flex; align-items: center;">
-						<input type="radio" name="gender" id="edit_male_radio" value="male" required style="width:18px; height:18px; margin-right: 10px;"> Male
-  						<input type="radio" name="gender" id="edit_female_radio" value="female" required style="width:18px; height:18px; margin-right: 10px; margin-left: 60px;"> Female<br>
+						<input type="radio" name="gender" id="edit_male_radio" value="Male" required style="width:18px; height:18px; margin-right: 10px;"> Male
+  						<input type="radio" name="gender" id="edit_female_radio" value="Female" required style="width:18px; height:18px; margin-right: 10px; margin-left: 60px;"> Female<br>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
