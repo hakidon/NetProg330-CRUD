@@ -197,7 +197,6 @@ def admin_view():
 
 @app.route('/api/employee')
 def get_employee_all():
-    employee_list = []
     try:
         conn = connect_to_db()
         conn.row_factory = sqlite3.Row
@@ -218,10 +217,7 @@ def func_employee(employee_id=None):
     conn = connect_to_db()
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    
-    # View Employee
     try:
-        # cur.execute('SELECT "employee id", "employee name", "gender", "email", "address", "Academic qualification" FROM employee_info  WHERE "employee id"=?', (employee_id,))
         cur.execute('SELECT * FROM employee_info  WHERE "employee id"=?', (employee_id,))
         rows = cur.fetchone()
 
